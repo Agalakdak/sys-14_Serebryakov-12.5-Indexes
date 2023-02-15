@@ -34,16 +34,14 @@ where date(p.payment_date) = '2005-07-30' and p.payment_date = r.rental_date and
 - оптимизируйте запрос: внесите корректировки по использованию операторов, при необходимости добавьте индексы.
 
 ```sql
-select distinct 
+select 
 concat(c.last_name, ' ', c.first_name) as "Full Name", 
 sum(p.amount) as "Total Amount"
 from payment p 
 inner join rental r on p.payment_date = r.rental_date
 inner join customer c on r.customer_id = c.customer_id 
- inner join inventory i on r.inventory_id = i.inventory_id 
- inner join film f on i.film_id = f.film_id
 where date(p.payment_date) = '2005-07-30'
-group by c.customer_id, f.title
+group by c.customer_id
 ```
 
 
